@@ -23,27 +23,37 @@ import Native.RegExp
 -- CREATE
 
 
-{-| A regular expression, describing a certain set of strings.
+{-| A regular expression [as specified in JavaScript][js].
+
+[js]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions
+
 -}
 type RegExp = RegExp
 
 
-{-| Create a RegExp that matches patterns [as specified in JavaScript](https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Writing_a_Regular_Expression_Pattern).
+{-| Try to create a `RegExp`. Not all strings are valid though, so you get a
+`Result' back.
 
-Be careful to escape backslashes properly! For example, `"\w"` is escaping the
-letter `w` which is probably not what you want. You probably want `"\\w"`
-instead, which escapes the backslash.
+There are some [shorthand character classes][short] like `\w` for word
+characters, `\s` for whitespace characters, and `\d` for digits. **Make sure
+they are properly escaped!** If you specify them directly in your code, they
+would look like `"\\w\\s\\d"`.
+
+[short]: http://www.regular-expressions.info/shorthand.html
 -}
 fromString : String -> Result String RegExp
 fromString string =
   fromStringWith { caseInsensitive = False, multiline = False } string
 
 
+{-| Create a `RegExp` with some additional options.
+-}
 fromStringWith : Options -> String -> Result String RegExp
 fromStringWith =
   Native.RegExp.fromStringWith
 
 
+{-|-}
 type alias Options =
   { caseInsensitive : Bool
   , multiline : Bool
@@ -56,11 +66,22 @@ type alias Options =
 
 {-| Check to see if a RegExp is contained in a string.
 
-    contains (TODO "123") "12345" == True
-    contains (TODO "b+") "aabbcc" == True
+    import RegExp
 
-    contains (TODO "789") "12345" == False
-    contains (TODO "z+") "aabbcc" == False
+    myContains : String -> String -> Bool
+    myContains userRegExp string =
+      case RegExp.fromString userRegExp of
+        Err _ ->
+          False
+
+        Ok re ->
+          RegExp.contains re string
+
+    -- myContains "123" "12345" == True
+    -- myContains "789" "12345" == False
+
+    -- myContains "b+" "aabbcc" == True
+    -- myContains "z+" "aabbcc" == False
 -}
 contains : RegExp -> String -> Bool
 contains =
@@ -69,9 +90,24 @@ contains =
 
 {-| Split a string, using a `RegExp` as the separator.
 
-    split (AtMost 1) (TODO ",") "tom,99,90,85" == ["tom","99,90,85"]
+    import RegExp
 
-    split All (TODO ",") "a,b,c,d" == ["a","b","c","d"]
+    mySplit : Count -> String -> String -> List String
+    mySplit count userRegExp string =
+      case RegExp.fromString userRegExp of
+        Err _ ->
+          []
+
+        Ok re ->
+          RegExp.split count re string
+
+    -- mySplit (AtMost 1) "|" "tom|99|90|85" == ["tom","99|90|85"]
+    -- mySplit All        "|" "tom|99|90|85" == ["tom","99","90","85"]
+
+If you want some really fancy splits, a library like
+[elm-tools/parser][parser] will probably be easier to use.
+
+[parser]: http://package.elm-lang.org/packages/elm-tools/parser/latest
 -}
 split : Count -> RegExp -> String -> List String
 split =
@@ -89,15 +125,35 @@ type Count
 
 {-| Find matches in a string:
 
-    findTwoCommas = find (AtMost 2) (regex ",")
+    import RegExp
 
-      -- map .index (findTwoCommas "a,b,c,d,e") == [1,3]
-      -- map .index (findTwoCommas "a b c d e") == []
+    myFind : Count -> String -> String -> List RegExp.Match
+    myFind count userRegExp string =
+      case RegExp.fromString userRegExp of
+        Err _ ->
+          []
 
-    places = find All (regex "[oi]n a (\\w+)") "I am on a boat in a lake."
+        Ok re ->
+          RegExp.find count re string
 
-      -- map .match places == ["on a boat", "in a lake"]
-      -- map .submatches places == [ [Just "boat"], [Just "lake"] ]
+    findTwoCommas : String -> List RegExp.Match
+    findTwoCommas string =
+      myFind (AtMost 2) "," string
+
+    -- List.map .index (findTwoCommas "a,b,c,d,e") == [1,3]
+    -- List.map .index (findTwoCommas "a b c d e") == []
+
+    places : List RegExp.Match
+    places =
+      myFind All "[oi]n a (\\w+)" "I am on a boat in a lake."
+
+    -- map .match      places == [ "on a boat", "in a lake" ]
+    -- map .submatches places == [ [Just "boat"], [Just "lake"] ]
+
+If you need `submatches` for some reason, a library like
+[elm-tools/parser][parser] will probably lead to better code in the long run.
+
+[parser]: http://package.elm-lang.org/packages/elm-tools/parser/latest
 -}
 find : Count -> RegExp -> String -> List Match
 find =
@@ -133,13 +189,28 @@ type alias Match =
 {-| Replace matches. The function from `Match` to `String` lets
 you use the details of a specific match when making replacements.
 
-    devowel = replace All (regex "[aeiou]") (\_ -> "")
+    import RegExp
 
-      -- devowel "The quick brown fox" == "Th qck brwn fx"
+    myReplace : Count -> String -> (RegExp.Match -> String) -> String -> String
+    myReplace count userRegExp replacer string =
+      case RegExp.fromString userRegExp of
+        Err _ ->
+          string
 
-    reverseWords = replace All (regex "\\w+") (\{match} -> String.reverse match)
+        Ok re ->
+          RegExp.replace count re replacer string
 
-      -- reverseWords "deliver mined parts" == "reviled denim strap"
+    devowel : String -> String
+    devowel string =
+      myReplace All "[aeiou]" (\_ -> "") string
+
+    -- devowel "The quick brown fox" == "Th qck brwn fx"
+
+    reverseWords : String -> String
+    reverseWords string =
+      myReplace All "\\w+" (.match >> String.reverse) string
+
+    -- reverseWords "deliver mined parts" == "reviled denim strap"
 -}
 replace : Count -> RegExp -> (Match -> String) -> String -> String
 replace =
