@@ -90,13 +90,9 @@ var _elm_lang$regexp$Native_RegExp$replace = F4(function(n, re, replacer, string
 	return string.replace(re, jsReplacer);
 });
 
-var _elm_lang$regexp$Native_RegExp$split = F3(function(n, re, str)
+var _elm_lang$regexp$Native_RegExp$split = F3(function(count, re, str)
 {
-	n = n.ctor === 'All' ? Infinity : n._0;
-	if (n === Infinity)
-	{
-		return _elm_lang$core$Native_List.fromArray(str.split(re));
-	}
+	var n = count.ctor === 'All' ? Infinity : count._0;
 	var string = str;
 	var result;
 	var out = [];
