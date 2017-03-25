@@ -32,7 +32,7 @@ type RegExp = RegExp
 
 
 {-| Try to create a `RegExp`. Not all strings are valid though, so you get a
-`Result' back.
+`Result' back. This means you can safely accept input from users.
 
 There are some [shorthand character classes][short] like `\w` for word
 characters, `\s` for whitespace characters, and `\d` for digits. **Make sure
