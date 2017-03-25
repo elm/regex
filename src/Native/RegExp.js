@@ -94,13 +94,13 @@ var _elm_lang$regexp$Native_RegExp$split = F3(function(count, re, str)
 {
 	var n = count.ctor === 'All' ? Infinity : count._0;
 	var string = str;
-	var result;
 	var out = [];
 	var start = re.lastIndex;
 	var restoreLastIndex = re.lastIndex;
 	while (n--)
 	{
-		if (!(result = re.exec(string))) break;
+		var result = re.exec(string);
+		if (!result) break;
 		out.push(string.slice(start, result.index));
 		start = re.lastIndex;
 	}
