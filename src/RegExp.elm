@@ -16,7 +16,7 @@ same kind of regular expressions accepted by JavaScript][js].
 
 -}
 
-import Native.RegExp
+import Elm.Kernel.RegExp
 
 
 
@@ -50,7 +50,7 @@ fromString string =
 -}
 fromStringWith : Options -> String -> Result String RegExp
 fromStringWith =
-  Native.RegExp.fromStringWith
+  Elm.Kernel.RegExp.fromStringWith
 
 
 {-|-}
@@ -85,7 +85,7 @@ type alias Options =
 -}
 contains : RegExp -> String -> Bool
 contains =
-  Native.RegExp.contains
+  Elm.Kernel.RegExp.contains
 
 
 {-| Split a string, using a `RegExp` as the separator.
@@ -111,7 +111,7 @@ If you want some really fancy splits, a library like
 -}
 split : Count -> RegExp -> String -> List String
 split =
-  Native.RegExp.split
+  Elm.Kernel.RegExp.split
 
 
 {-| Customize functions like `split` and `find`. For example, `replace All`
@@ -157,7 +157,7 @@ If you need `submatches` for some reason, a library like
 -}
 find : Count -> RegExp -> String -> List Match
 find =
-  Native.RegExp.find
+  Elm.Kernel.RegExp.find
 
 
 {-| The details about a particular match:
@@ -214,4 +214,4 @@ you use the details of a specific match when making replacements.
 -}
 replace : Count -> RegExp -> (Match -> String) -> String -> String
 replace =
-  Native.RegExp.replace
+  Elm.Kernel.RegExp.replace
