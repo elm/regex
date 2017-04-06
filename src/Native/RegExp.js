@@ -2,7 +2,7 @@
 
 // CREATE
 
-var _elm_lang$regexp$Native_RegExp$fromStringWith = F2(function(options, string)
+var _RegExp_fromStringWith = F2(function(options, string)
 {
 	var flags = 'g';
 	if (options.multiline) { flags += 'm'; }
@@ -21,13 +21,13 @@ var _elm_lang$regexp$Native_RegExp$fromStringWith = F2(function(options, string)
 
 // USE
 
-var _elm_lang$regexp$Native_RegExp$contains = F2(function(re, string)
+var _RegExp_contains = F2(function(re, string)
 {
 	return string.match(re) !== null;
 });
 
 
-var _elm_lang$regexp$Native_RegExp$find = F3(function(n, re, str)
+var _RegExp_find = F3(function(n, re, str)
 {
 	n = n.ctor === 'All' ? Infinity : n._0;
 	var out = [];
@@ -61,7 +61,7 @@ var _elm_lang$regexp$Native_RegExp$find = F3(function(n, re, str)
 });
 
 
-var _elm_lang$regexp$Native_RegExp$replace = F4(function(n, re, replacer, string)
+var _RegExp_replace = F4(function(n, re, replacer, string)
 {
 	n = n.ctor === 'All' ? Infinity : n._0;
 	var count = 0;
@@ -90,7 +90,7 @@ var _elm_lang$regexp$Native_RegExp$replace = F4(function(n, re, replacer, string
 	return string.replace(re, jsReplacer);
 });
 
-var _elm_lang$regexp$Native_RegExp$split = F3(function(count, re, str)
+var _RegExp_split = F3(function(count, re, str)
 {
 	var n = count.ctor === 'All' ? Infinity : count._0;
 	var string = str;
