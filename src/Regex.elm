@@ -1,5 +1,5 @@
-module RegExp exposing
-  ( RegExp
+module Regex exposing
+  ( Regex
   , fromString
   , fromStringWith
   , Options
@@ -15,13 +15,13 @@ module RegExp exposing
   )
 
 
-{-| A library for working with regular expressions. It uses [the
-same kind of regular expressions accepted by JavaScript][js].
+{-| A library for working with regex. The syntax matches the [`RegExp`]][js]
+library from JavaScript.
 
 [js]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions
 
 # Create
-@docs RegExp, fromString, fromStringWith, Options, never
+@docs Regex, fromString, fromStringWith, Options, never
 
 # Use
 @docs contains, split, find, replace, Match
@@ -32,7 +32,7 @@ same kind of regular expressions accepted by JavaScript][js].
 -}
 
 
-import Elm.Kernel.RegExp
+import Elm.Kernel.Regex
 
 
 
@@ -44,18 +44,18 @@ import Elm.Kernel.RegExp
 [js]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions
 
 -}
-type RegExp = RegExp
+type Regex = Regex
 
 
-{-| Try to create a `RegExp`. Not all strings are valid though, so you get a
+{-| Try to create a `Regex`. Not all strings are valid though, so you get a
 `Result' back. This means you can safely accept input from users.
 
-    import RegExp
+    import Regex
 
-    lowerCase : RegExp.RegExp
+    lowerCase : Regex.Regex
     lowerCase =
-      Maybe.withDefault RegExp.never <|
-        RegExp.fromString "[a-z]+"
+      Maybe.withDefault Regex.never <|
+        Regex.fromString "[a-z]+"
 
 **Note:** There are some [shorthand character classes][short] like `\w` for
 word characters, `\s` for whitespace characters, and `\d` for digits. **Make
@@ -64,24 +64,24 @@ they would look like `"\\w\\s\\d"`.
 
 [short]: http://www.regular-expressions.info/shorthand.html
 -}
-fromString : String -> Maybe RegExp
+fromString : String -> Maybe Regex
 fromString string =
   fromStringWith { caseInsensitive = False, multiline = False } string
 
 
-{-| Create a `RegExp` with some additional options. For example, you can define
+{-| Create a `Regex` with some additional options. For example, you can define
 `fromString` like this:
 
-    import RegExp
+    import Regex
 
-    fromString : String -> Maybe RegExp.RegExp
+    fromString : String -> Maybe Regex.Regex
     fromString string =
       fromStringWith { caseInsensitive = False, multiline = False } string
 
 -}
-fromStringWith : Options -> String -> Maybe RegExp
+fromStringWith : Options -> String -> Maybe Regex
 fromStringWith =
-  Elm.Kernel.RegExp.fromStringWith
+  Elm.Kernel.Regex.fromStringWith
 
 
 {-|-}
@@ -93,68 +93,68 @@ type alias Options =
 
 {-| A regular expression that never matches any string.
 -}
-never : RegExp
+never : Regex
 never =
-  Elm.Kernel.RegExp.never
+  Elm.Kernel.Regex.never
 
 
 
 -- USE
 
 
-{-| Check to see if a RegExp is contained in a string.
+{-| Check to see if a Regex is contained in a string.
 
-    import RegExp
+    import Regex
 
-    digit : RegExp.RegExp
+    digit : Regex.Regex
     digit =
-      Maybe.withDefault RegExp.never <|
-        RegExp.fromString "[0-9]"
+      Maybe.withDefault Regex.never <|
+        Regex.fromString "[0-9]"
 
-    -- RegExp.contains digit "abc123" == True
-    -- RegExp.contains digit "abcxyz" == False
+    -- Regex.contains digit "abc123" == True
+    -- Regex.contains digit "abcxyz" == False
 -}
-contains : RegExp -> String -> Bool
+contains : Regex -> String -> Bool
 contains =
-  Elm.Kernel.RegExp.contains
+  Elm.Kernel.Regex.contains
 
 
 {-| Split a string. The following example will split on commas and tolerate
 whitespace on either side of the comma:
 
-    import RegExp
+    import Regex
 
-    comma : RegExp.RegExp
+    comma : Regex.Regex
     comma =
-      Maybe.withDefault RegExp.never <|
-        RegExp.fromString " *, *"
+      Maybe.withDefault Regex.never <|
+        Regex.fromString " *, *"
 
-    -- RegExp.split comma "tom,99,90,85"     == ["tom","99","90","85"]
-    -- RegExp.split comma "tom, 99, 90, 85"  == ["tom","99","90","85"]
-    -- RegExp.split comma "tom , 99, 90, 85" == ["tom","99","90","85"]
+    -- Regex.split comma "tom,99,90,85"     == ["tom","99","90","85"]
+    -- Regex.split comma "tom, 99, 90, 85"  == ["tom","99","90","85"]
+    -- Regex.split comma "tom , 99, 90, 85" == ["tom","99","90","85"]
 
 If you want some really fancy splits, a library like
 [elm-lang/parser][parser] will probably be easier to use.
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
 -}
-split : RegExp -> String -> List String
+split : Regex -> String -> List String
 split =
-  Elm.Kernel.RegExp.splitAtMost Elm.Kernel.RegExp.infinity
+  Elm.Kernel.Regex.splitAtMost Elm.Kernel.Regex.infinity
 
 
 {-| Find matches in a string:
 
-    import RegExp
+    import Regex
 
-    location : RegExp.RegExp
+    location : Regex.Regex
     location =
-      Maybe.withDefault RegExp.never <|
-        RegExp.fromString "[oi]n a (\\w+)"
+      Maybe.withDefault Regex.never <|
+        Regex.fromString "[oi]n a (\\w+)"
 
-    places : List RegExp.Match
+    places : List Regex.Match
     places =
-      RegExp.find location "I am on a boat in a lake."
+      Regex.find location "I am on a boat in a lake."
 
     -- map .match      places == [ "on a boat", "in a lake" ]
     -- map .submatches places == [ [Just "boat"], [Just "lake"] ]
@@ -164,9 +164,9 @@ If you need `submatches` for some reason, a library like
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
 -}
-find : RegExp -> String -> List Match
+find : Regex -> String -> List Match
 find =
-  Elm.Kernel.RegExp.findAtMost Elm.Kernel.RegExp.infinity
+  Elm.Kernel.Regex.findAtMost Elm.Kernel.Regex.infinity
 
 
 {-| The details about a particular match:
@@ -178,7 +178,7 @@ find =
     find a match, that is match `number` one. Second time is match `number` two.
     This is useful when paired with `replace` if replacement is dependent on how
     many times a pattern has appeared before.
-  * `submatches` &mdash; a `RegExp` can have [subpatterns][sub], sup-parts that
+  * `submatches` &mdash; a `Regex` can have [subpatterns][sub], sup-parts that
     are in parentheses. This is a list of all these submatches. This is kind of
     garbage to use, and using a package like [elm-lang/parser][parser] is
     probably easier.
@@ -198,16 +198,16 @@ type alias Match =
 {-| Replace matches. The function from `Match` to `String` lets
 you use the details of a specific match when making replacements.
 
-    import RegExp
+    import Regex
 
-    userReplace : String -> (RegExp.Match -> String) -> String -> String
-    userReplace userRegExp replacer string =
-      case RegExp.fromString userRegExp of
+    userReplace : String -> (Regex.Match -> String) -> String -> String
+    userReplace userRegex replacer string =
+      case Regex.fromString userRegex of
         Nothing ->
           string
 
-        Just regexp ->
-          RegExp.replace regexp replacer string
+        Just regex ->
+          Regex.replace regex replacer string
 
     devowel : String -> String
     devowel string =
@@ -221,9 +221,9 @@ you use the details of a specific match when making replacements.
 
     -- reverseWords "deliver mined parts" == "reviled denim strap"
 -}
-replace : RegExp -> (Match -> String) -> String -> String
+replace : Regex -> (Match -> String) -> String -> String
 replace =
-  Elm.Kernel.RegExp.replace Elm.Kernel.RegExp.infinity
+  Elm.Kernel.Regex.replace Elm.Kernel.Regex.infinity
 
 
 
@@ -236,9 +236,9 @@ A library like [elm-lang/parser][parser] will probably lead to better code in
 the long run.
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest-}
-splitAtMost : Int -> RegExp -> String -> List String
+splitAtMost : Int -> Regex -> String -> List String
 splitAtMost =
-  Elm.Kernel.RegExp.splitAtMost
+  Elm.Kernel.Regex.splitAtMost
 
 
 {-| Just like `find` but it stops after some number of matches.
@@ -248,9 +248,9 @@ the long run.
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
 -}
-findAtMost : Int -> RegExp -> String -> List Match
+findAtMost : Int -> Regex -> String -> List Match
 findAtMost =
-  Elm.Kernel.RegExp.findAtMost
+  Elm.Kernel.Regex.findAtMost
 
 
 {-| Just like `replace` but it stops after some number of matches.
@@ -260,6 +260,6 @@ the long run.
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
 -}
-replaceAtMost : Int -> RegExp -> String -> List Match
+replaceAtMost : Int -> Regex -> String -> List Match
 replaceAtMost =
-  Elm.Kernel.RegExp.replaceAtMost
+  Elm.Kernel.Regex.replaceAtMost

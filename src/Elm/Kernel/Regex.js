@@ -2,15 +2,15 @@
 
 import Elm.Kernel.List exposing (fromArray)
 import Maybe exposing (Just, Nothing)
-import RegExp exposing (Match)
+import Regex exposing (Match)
 
 */
 
 // CREATE
 
-var _RegExp_never = /.^/;
+var _Regex_never = /.^/;
 
-var _RegExp_fromStringWith = F2(function(options, string)
+var _Regex_fromStringWith = F2(function(options, string)
 {
 	var flags = 'g';
 	if (options.__$multiline) { flags += 'm'; }
@@ -29,13 +29,13 @@ var _RegExp_fromStringWith = F2(function(options, string)
 
 // USE
 
-var _RegExp_contains = F2(function(re, string)
+var _Regex_contains = F2(function(re, string)
 {
 	return string.match(re) !== null;
 });
 
 
-var _RegExp_findAtMost = F3(function(n, re, str)
+var _Regex_findAtMost = F3(function(n, re, str)
 {
 	var out = [];
 	var number = 0;
@@ -55,7 +55,7 @@ var _RegExp_findAtMost = F3(function(n, re, str)
 				? __Maybe_Just(submatch)
 				: __Maybe_Nothing;
 		}
-		out.push(__RegExp_Match(result[0], result.index, number, __List_fromArray(subs)));
+		out.push(__Regex_Match(result[0], result.index, number, __List_fromArray(subs)));
 		prevLastIndex = re.lastIndex;
 	}
 	re.lastIndex = lastIndex;
@@ -63,7 +63,7 @@ var _RegExp_findAtMost = F3(function(n, re, str)
 });
 
 
-var _RegExp_replaceAtMost = F4(function(n, re, replacer, string)
+var _Regex_replaceAtMost = F4(function(n, re, replacer, string)
 {
 	var count = 0;
 	function jsReplacer(match)
@@ -81,12 +81,12 @@ var _RegExp_replaceAtMost = F4(function(n, re, replacer, string)
 				? __Maybe_Just(submatch)
 				: __Maybe_Nothing;
 		}
-		return replacer(__RegExp_Match(match, arguments[arguments.length - 2], count, __List_fromArray(submatches));
+		return replacer(__Regex_Match(match, arguments[arguments.length - 2], count, __List_fromArray(submatches));
 	}
 	return string.replace(re, jsReplacer);
 });
 
-var _RegExp_splitAtMost = F3(function(n, re, str)
+var _Regex_splitAtMost = F3(function(n, re, str)
 {
 	var string = str;
 	var out = [];
@@ -104,4 +104,4 @@ var _RegExp_splitAtMost = F3(function(n, re, str)
 	return __List_fromArray(out);
 });
 
-var _RegExp_infinity = Infinity;
+var _Regex_infinity = Infinity;
