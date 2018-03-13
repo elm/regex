@@ -15,7 +15,7 @@ module Regex exposing
   )
 
 
-{-| A library for working with regex. The syntax matches the [`RegExp`]][js]
+{-| A library for working with regex. The syntax matches the [`RegExp`][js]
 library from JavaScript.
 
 [js]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions
