@@ -1,11 +1,11 @@
 {
     "type": "package",
-    "name": "elm-lang/regexp",
+    "name": "elm-lang/regex",
     "version": "1.0.0",
     "summary": "Support for JS-style regular expressions in Elm",
     "license": "BSD-3-Clause",
     "exposed-modules": [
-        "RegExp"
+        "Regex"
     ],
     "dependencies": {
         "elm-lang/core": "6.0.0 <= v < 7.0.0"
