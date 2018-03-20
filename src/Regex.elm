@@ -223,7 +223,7 @@ you use the details of a specific match when making replacements.
 -}
 replace : Regex -> (Match -> String) -> String -> String
 replace =
-  Elm.Kernel.Regex.replace Elm.Kernel.Regex.infinity
+  Elm.Kernel.Regex.replaceAtMost Elm.Kernel.Regex.infinity
 
 
 
@@ -260,6 +260,6 @@ the long run.
 
 [parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
 -}
-replaceAtMost : Int -> Regex -> String -> List Match
+replaceAtMost : Int -> Regex -> (Match -> String) -> String -> String
 replaceAtMost =
   Elm.Kernel.Regex.replaceAtMost
