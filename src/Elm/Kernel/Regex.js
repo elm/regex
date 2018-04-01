@@ -81,7 +81,7 @@ var _Regex_replaceAtMost = F4(function(n, re, replacer, string)
 				? __Maybe_Just(submatch)
 				: __Maybe_Nothing;
 		}
-		return replacer(__Regex_Match(match, arguments[arguments.length - 2], count, __List_fromArray(submatches));
+		return replacer(__Regex_Match(match, arguments[arguments.length - 2], count, __List_fromArray(submatches)));
 	}
 	return string.replace(re, jsReplacer);
 });
