@@ -55,7 +55,7 @@ var _Regex_findAtMost = F3(function(n, re, str)
 				? __Maybe_Just(submatch)
 				: __Maybe_Nothing;
 		}
-		out.push(__Regex_Match(result[0], result.index, number, __List_fromArray(subs)));
+		out.push(A4(__Regex_Match, result[0], result.index, number, __List_fromArray(subs)));
 		prevLastIndex = re.lastIndex;
 	}
 	re.lastIndex = lastIndex;
@@ -81,7 +81,7 @@ var _Regex_replaceAtMost = F4(function(n, re, replacer, string)
 				? __Maybe_Just(submatch)
 				: __Maybe_Nothing;
 		}
-		return replacer(__Regex_Match(match, arguments[arguments.length - 2], count, __List_fromArray(submatches)));
+		return replacer(A4(__Regex_Match, match, arguments[arguments.length - 2], count, __List_fromArray(submatches)));
 	}
 	return string.replace(re, jsReplacer);
 });
