@@ -136,7 +136,7 @@ whitespace on either side of the comma:
 If you want some really fancy splits, a library like
 [elm-lang/parser][parser] will probably be easier to use.
 
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[parser]: /packages/elm-lang/parser/latest
 -}
 split : Regex -> String -> List String
 split =
@@ -162,7 +162,7 @@ split =
 If you need `submatches` for some reason, a library like
 [elm-lang/parser][parser] will probably lead to better code in the long run.
 
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[parser]: /packages/elm-lang/parser/latest
 -}
 find : Regex -> String -> List Match
 find =
@@ -184,7 +184,7 @@ find =
     probably easier.
 
 [sub]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Parenthesized_Substring_Matches
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[parser]: /packages/elm-lang/parser/latest
 
 -}
 type alias Match =
@@ -235,7 +235,7 @@ replace =
 A library like [elm-lang/parser][parser] will probably lead to better code in
 the long run.
 
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest-}
+[parser]: /packages/elm-lang/parser/latest-}
 splitAtMost : Int -> Regex -> String -> List String
 splitAtMost =
   Elm.Kernel.Regex.splitAtMost
@@ -246,7 +246,7 @@ splitAtMost =
 A library like [elm-lang/parser][parser] will probably lead to better code in
 the long run.
 
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[parser]: /packages/elm-lang/parser/latest
 -}
 findAtMost : Int -> Regex -> String -> List Match
 findAtMost =
@@ -258,7 +258,7 @@ findAtMost =
 A library like [elm-lang/parser][parser] will probably lead to better code in
 the long run.
 
-[parser]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[parser]: /packages/elm-lang/parser/latest
 -}
 replaceAtMost : Int -> Regex -> (Match -> String) -> String -> String
 replaceAtMost =
