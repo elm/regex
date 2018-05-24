@@ -134,9 +134,9 @@ whitespace on either side of the comma:
     -- Regex.split comma "tom , 99, 90, 85" == ["tom","99","90","85"]
 
 If you want some really fancy splits, a library like
-[elm-lang/parser][parser] will probably be easier to use.
+[`elm/parser`][parser] will probably be easier to use.
 
-[parser]: /packages/elm-lang/parser/latest
+[parser]: /packages/elm/parser/latest
 -}
 split : Regex -> String -> List String
 split =
@@ -160,9 +160,9 @@ split =
     -- map .submatches places == [ [Just "boat"], [Just "lake"] ]
 
 If you need `submatches` for some reason, a library like
-[elm-lang/parser][parser] will probably lead to better code in the long run.
+[`elm/parser`][parser] will probably lead to better code in the long run.
 
-[parser]: /packages/elm-lang/parser/latest
+[parser]: /packages/elm/parser/latest
 -}
 find : Regex -> String -> List Match
 find =
@@ -180,11 +180,11 @@ find =
     many times a pattern has appeared before.
   * `submatches` &mdash; a `Regex` can have [subpatterns][sub], sup-parts that
     are in parentheses. This is a list of all these submatches. This is kind of
-    garbage to use, and using a package like [elm-lang/parser][parser] is
+    garbage to use, and using a package like [`elm/parser`][parser] is
     probably easier.
 
 [sub]: https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Parenthesized_Substring_Matches
-[parser]: /packages/elm-lang/parser/latest
+[parser]: /packages/elm/parser/latest
 
 -}
 type alias Match =
@@ -232,10 +232,11 @@ replace =
 
 {-| Just like `split` but it stops after some number of matches.
 
-A library like [elm-lang/parser][parser] will probably lead to better code in
+A library like [`elm/parser`][parser] will probably lead to better code in
 the long run.
 
-[parser]: /packages/elm-lang/parser/latest-}
+[parser]: /packages/elm/parser/latest
+-}
 splitAtMost : Int -> Regex -> String -> List String
 splitAtMost =
   Elm.Kernel.Regex.splitAtMost
@@ -243,10 +244,10 @@ splitAtMost =
 
 {-| Just like `find` but it stops after some number of matches.
 
-A library like [elm-lang/parser][parser] will probably lead to better code in
+A library like [`elm/parser`][parser] will probably lead to better code in
 the long run.
 
-[parser]: /packages/elm-lang/parser/latest
+[parser]: /packages/elm/parser/latest
 -}
 findAtMost : Int -> Regex -> String -> List Match
 findAtMost =
@@ -255,10 +256,10 @@ findAtMost =
 
 {-| Just like `replace` but it stops after some number of matches.
 
-A library like [elm-lang/parser][parser] will probably lead to better code in
+A library like [`elm/parser`][parser] will probably lead to better code in
 the long run.
 
-[parser]: /packages/elm-lang/parser/latest
+[parser]: /packages/elm/parser/latest
 -}
 replaceAtMost : Int -> Regex -> (Match -> String) -> String -> String
 replaceAtMost =
