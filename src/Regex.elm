@@ -62,7 +62,7 @@ word characters, `\s` for whitespace characters, and `\d` for digits. **Make
 sure they are properly escaped!** If you specify them directly in your code,
 they would look like `"\\w\\s\\d"`.
 
-[short]: http://www.regular-expressions.info/shorthand.html
+[short]: https://www.regular-expressions.info/shorthand.html
 -}
 fromString : String -> Maybe Regex
 fromString string =
