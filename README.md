@@ -1,8 +1,8 @@
 # Regex in Elm
 
-**Generally speaking, it will be easier and nicer to use a parsing library like [`elm-lang/parser`][elm] instead of this.**
+**Generally speaking, it will be easier and nicer to use a parsing library like [`elm/parser`][elm] instead of this.**
 
-[elm]: http://package.elm-lang.org/packages/elm-lang/parser/latest
+[elm]: http://package.elm-lang.org/packages/elm/parser/latest
 
 That said, sometimes you may want the kind of regular expressions that appear in JavaScript. Maybe you found some regex on StackOverflow and just want to place it in your code directly. This library supports that scenario.
 
@@ -56,4 +56,4 @@ The regex idea has become quite influential. It is “good enough” for a lot o
 
 The root issue is that regular expressions were not _meant_ to parse everything. For example, regular expressions are unable to describe sets of strings with balanced parentheses, so no regular expression can describe the set of `"()"`, `"(())"`, `"((()))"`, etc. (That means [they cannot parse matching HTML tags](https://stackoverflow.com/a/1732454) either!) But you _can_ do that with context-free grammars! With one really elegant addition! So the limitations of regular expressions are actually their whole point. They are _supposed_ to be simple to show why other formulations can express more.
 
-So this is why I recommend the [`elm-lang/parser`][elm] package over this one. It _is_ meant to parse everything, and in a way that works really nice with Elm.
+So this is why I recommend the [`elm/parser`][elm] package over this one. It _is_ meant to parse everything, and in a way that works really nice with Elm.
