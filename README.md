@@ -2,7 +2,7 @@
 
 **Generally speaking, it will be easier and nicer to use a parsing library like [`elm/parser`][elm] instead of this.**
 
-[elm]: http://package.elm-lang.org/packages/elm/parser/latest
+[elm]: https://package.elm-lang.org/packages/elm/parser/latest
 
 That said, sometimes you may want the kind of regular expressions that appear in JavaScript. Maybe you found some regex on StackOverflow and just want to place it in your code directly. This library supports that scenario.
 
