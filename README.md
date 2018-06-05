@@ -17,8 +17,6 @@ So instead of searching Stack Overflow for "email regex" we could have a well-te
 And as the community handles more and more cases in an _excellent_ way, I hope a day will come when no one wants the `regex` package anymore.
 
 
-<br>
-
 
 ## Historical Notes
 
