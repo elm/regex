@@ -26,6 +26,11 @@ var _Regex_fromStringWith = F2(function(options, string)
 	}
 });
 
+var _Regex_escape = F1(function(string)
+{
+	return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+});
+
 
 // USE
 

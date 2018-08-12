@@ -3,6 +3,7 @@ module Regex exposing
   , fromString
   , fromStringWith
   , Options
+  , escape
   , never
   , contains
   , split
@@ -89,6 +90,13 @@ type alias Options =
   { caseInsensitive : Bool
   , multiline : Bool
   }
+
+
+{-| Escape strings to be regular expressions, making all special characters safe.
+-}
+escape : String -> String
+escape =
+  Elm.Kernel.Regex.escape
 
 
 {-| A regular expression that never matches any string.
