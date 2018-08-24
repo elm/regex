@@ -36,7 +36,7 @@ In theoritical computer science, the idea of a “regular expression” is a sim
 
 So you basically have `*` to repeat, parentheses for grouping, and `|` for providing alternatives. That is it! A simple syntax that can describe a bunch of different things.
 
-It also has quite beautiful relationships to finite automata, context-free grammers, turing machines, etc. If you are into this sort of thing, I highly recommend [Introduction to the Theory of Computation](https://math.mit.edu/~sipser/book.html) by Michael Sipser!
+It also has quite beautiful relationships to finite automata, context-free grammars, turing machines, etc. If you are into this sort of thing, I highly recommend [Introduction to the Theory of Computation](https://math.mit.edu/~sipser/book.html) by Michael Sipser!
 
 
 ### Regex
