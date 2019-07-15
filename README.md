@@ -25,7 +25,7 @@ I want to draw a distinction between **regular expressions** and **regex**. Thes
 
 ### Regular Expressions
 
-In theoritical computer science, the idea of a “regular expression” is a simple expression that matches a set of strings. For example:
+In theoretical computer science, the idea of a “regular expression” is a simple expression that matches a set of strings. For example:
 
 - `a` matches  `"a"`
 - `ab` matches  `"ab"`
