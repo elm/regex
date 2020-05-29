@@ -48,7 +48,7 @@ type Regex = Regex
 
 
 {-| Try to create a `Regex`. Not all strings are valid though, so you get a
-`Maybe' back. This means you can safely accept input from users.
+`Maybe` back. This means you can safely accept input from users.
 
     import Regex
 
