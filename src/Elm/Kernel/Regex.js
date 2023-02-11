@@ -15,6 +15,7 @@ var _Regex_fromStringWith = F2(function(options, string)
 	var flags = 'g';
 	if (options.__$multiline) { flags += 'm'; }
 	if (options.__$caseInsensitive) { flags += 'i'; }
+    if (options.__$unicode) { flags += 'u'; }
 
 	try
 	{

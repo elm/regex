@@ -66,7 +66,7 @@ they would look like `"\\w\\s\\d"`.
 -}
 fromString : String -> Maybe Regex
 fromString string =
-  fromStringWith { caseInsensitive = False, multiline = False } string
+  fromStringWith { caseInsensitive = False, multiline = False, unicode = False } string
 
 
 {-| Create a `Regex` with some additional options. For example, you can define
@@ -76,7 +76,7 @@ fromString string =
 
     fromString : String -> Maybe Regex.Regex
     fromString string =
-      fromStringWith { caseInsensitive = False, multiline = False } string
+      fromStringWith { caseInsensitive = False, multiline = False, unicode = False } string
 
 -}
 fromStringWith : Options -> String -> Maybe Regex
@@ -88,6 +88,7 @@ fromStringWith =
 type alias Options =
   { caseInsensitive : Bool
   , multiline : Bool
+  , unicode : Bool
   }
 
 
